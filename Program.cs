@@ -23,27 +23,36 @@ namespace Gestion_des_notes
                 Console.WriteLine("4. Afficher le relevé de notes d'un étudiant");
                 Console.WriteLine("5. Quitter");
 
-                int choix = int.Parse(Console.ReadLine());
-
-                switch (choix)
+                string choixSaisie =Console.ReadLine();
+                int choix = 0;
+                bool conversion=int.TryParse(choixSaisie, out choix);
+                if (!conversion)
                 {
-                    case 1:
-                        Etudiant.ajouterEtudiant(etudiants);
-                        break;
-                    case 2:
-                        Cours.ajouterCours(cours);
-                        break;
-                    case 3:
-                        Notes.ajouterNote(notes);
-                        break;
-                    case 4:
-                        Console.Write("Numéro d'étudiant: ");
-                        int numeroEtudiant = int.Parse(Console.ReadLine());
-                        Etudiant.ChargerEtudiant(numeroEtudiant);
-                        break;
-                    case 5:
-                        return;
+                    Console.WriteLine("Entrer un choix valide...");
                 }
+                else
+                {   switch (choix)
+                    {
+                        case 1:
+                            Etudiant.ajouterEtudiant(etudiants);
+                            break;
+                        case 2:
+                            Cours.ajouterCours(cours);
+                            break;
+                        case 3:
+                            Notes.ajouterNote(notes);
+                            break;
+                        case 4:
+                            Console.Write("Numéro d'étudiant: ");
+                            int numeroEtudiant = int.Parse(Console.ReadLine());
+                            Etudiant.ChargerEtudiant(numeroEtudiant);
+                            break;
+                        case 5:
+                            return;
+                    }
+
+                }
+                
             }
         }
     }
