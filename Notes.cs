@@ -79,7 +79,7 @@ namespace Gestion_des_notes
 
         public override string ToString()
         {
-            return $@" Note: {NumeroEtudiant} {NumeroCours} {Note}";
+            return $@"Cours:{NumeroCours}, Note:{Note}";
         }
     }
 }

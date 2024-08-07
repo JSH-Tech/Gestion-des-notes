@@ -46,7 +46,11 @@ namespace Gestion_des_notes
                         case 4:
                             Console.Write("Numéro d'étudiant: ");
                             int numeroEtudiant = int.Parse(Console.ReadLine());
-                            Etudiant.ChargerEtudiant(numeroEtudiant);
+                            Etudiant nouveEtudiant=Etudiant.ChargerEtudiant(numeroEtudiant);
+                            if (nouveEtudiant != null)
+                            {
+                                nouveEtudiant.AfficherDetails();
+                            }
                             break;
                         case 5:
                             return;

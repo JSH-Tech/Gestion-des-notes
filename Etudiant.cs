@@ -100,24 +100,45 @@ namespace Gestion_des_notes
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string[] lignes = File.ReadAllLines(filePath);
-                string[] etudiantInfo = lignes[0].Split(',');
-                string nom = etudiantInfo[1].Split(':')[1].Trim();
-                string prenom = etudiantInfo[2].Split(':')[1].Trim();
-
-                Etudiant etudiant = new Etudiant(nom, prenom);
-                for (int i = 1; i < lignes.Length; i++)
+                string[] etudiantInfo = lignes[0].Split(' ');
+                if (etudiantInfo.Length >= 4)
                 {
-                    string[] noteInfo = lignes[i].Split(',');
-                    int numeroCours = int.Parse(noteInfo[1].Split(':')[1].Trim());
-                    double note = double.Parse(noteInfo[2].Split(':')[1].Trim());
-                    etudiant.ListNotes.Add(new Notes(numeroEtudiant, numeroCours, note));
+                    string nom = etudiantInfo[1] + " " + etudiantInfo[2];
+                    string prenom = etudiantInfo[3];
+
+                    Etudiant etudiant = new Etudiant(nom, prenom);
+                    for (int i = 1; i < lignes.Length; i++)
+                    {
+                        string[] noteInfo = lignes[i].Split(' ');
+                        if (noteInfo.Length >= 3)
+                        {
+                            int numeroCours = int.Parse(noteInfo[1]);
+                            double note = double.Parse(noteInfo[2]);
+                            etudiant.ListNotes.Add(new Notes(numeroEtudiant, numeroCours, note));
+                        }
+                    }
+                    return etudiant;
                 }
-                return etudiant;
+                else
+                {
+                    Console.WriteLine("Le fichier a un format incorrect pour les informations de l'étudiant.");
+                    return null;
+                }
             }
         }
 
-        public override string ToString() {
-            return $@"Etudiant: {NumeroEtudiant} {Nom} {Prenom} .";
+        public override string ToString()
+        {
+            return $@"Nom:{Nom}, Prénom:{Prenom}";
+        }
+
+        public void AfficherDetails()
+        {
+            Console.WriteLine(this.ToString());
+            foreach (var note in ListNotes)
+            {
+                Console.WriteLine(note.ToString());
+            }
         }
     }
 }
