@@ -17,6 +17,7 @@ namespace Gestion_des_notes
 
             while (true)
             {
+                Console.WriteLine("Veuillez choisir une option...");
                 Console.WriteLine("1. Ajouter un étudiant");
                 Console.WriteLine("2. Ajouter un cours");
                 Console.WriteLine("3. Ajouter une note");
